@@ -1,5 +1,5 @@
 Sidebar Plugin
-========
+==============
 
 A simple plugin that will provide you with some helpers to use a sidebar in your app.
 
@@ -9,7 +9,7 @@ A simple plugin that will provide you with some helpers to use a sidebar in your
 2. it will generate a views/sidebars directory
 3. make a views/sidebars/_global.rhtml file, this will be the app-wide sidebar
    file.
-4. anywhere in your layout ()where you want to insert your sidebar) or view file   insert the following:
+4. anywhere in your layout (where you want to insert your sidebar) or view file   insert the following:
    <%= display_sidebar %>
 
 == USAGE
@@ -24,8 +24,8 @@ A simple plugin that will provide you with some helpers to use a sidebar in your
 
 1. sidebar will search for sidebars in the following places in the following
    order:
-   - sidebars/[controller]/_[action].rhtml #=> view specific sidebar
-   - sidebars/[controller]/_global.rhtml #=> controller specific sidebar
-   - sidebars/_global.rhtml #=> app-wide specific sidebar
+   1. sidebars/[controller]/_[action].rhtml #=> view specific sidebar
+   2. sidebars/[controller]/_global.rhtml #=> controller specific sidebar
+   3. sidebars/_global.rhtml #=> app-wide specific sidebar
 
 
