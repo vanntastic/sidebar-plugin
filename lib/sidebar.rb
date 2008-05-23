@@ -32,5 +32,13 @@ module Innerfusion
       end
     end
     
+    # if you need to quickly copy a sidebar from another within the same
+    # controller, here's the easy way :
+    # copy_from :name_of_sidebar
+    #   # => render :partial => 'sidebars/#{params[:controller]}/#{sidebar}'
+    def copy_from(sidebar)
+      render :partial => "sidebars/#{params[:controller]}/#{sidebar.to_s}" 
+    end
+    
   end
 end
