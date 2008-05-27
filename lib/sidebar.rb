@@ -16,6 +16,7 @@ module Innerfusion
     # you can specify a wrapping element by using the following syntax
     # display_sidebar :inside => '<div id="sidebars">yield</div>'
     #         - yield will be substituted with the sidebar
+    # 
     def display_sidebar(options={}, &block)
       options[:inside] ||= ""
       sidebar_partial = "sidebars/#{params[:controller]}/#{params[:action]}"
