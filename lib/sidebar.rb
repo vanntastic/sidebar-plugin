@@ -10,8 +10,14 @@ module Innerfusion
     # 3. views/sidebars/global # => app wide specific sidebar
     # to generate a sidebar skeleton dir, use the following rake task
     # rake sidebar:generate FOR='controller/action'
-    
-    def display_sidebar(&block)
+    # you can set the message to display by passing it in the block
+    # display_sidebar { "Nothing to see" } # => will display "Nothing to see" if sidebar isn't 
+    #                                           found
+    # you can specify a wrapping element by using the following syntax
+    # display_sidebar :inside => '<div id="sidebars">yield</div>'
+    #         - yield will be substituted with the sidebar
+    def display_sidebar(options={}, &block)
+      options[:inside] ||= ""
       sidebar_partial = "sidebars/#{params[:controller]}/#{params[:action]}"
       sidebar_file = File.join(RAILS_ROOT, "app/views/sidebars", params[:controller], 
                               "_#{params[:action]}.rhtml")
@@ -23,9 +29,11 @@ module Innerfusion
       global_sidebar_partial = "sidebars/global"
 
       if File.exists?(sidebar_file)
-        render :partial => sidebar_partial
+        side_bar = render(:partial => sidebar_partial) 
+        options[:inside].blank? ? side_bar : options[:inside].gsub("yield",side_bar)
       elsif File.exists?(controller_sidebar_file)
-        render :partial => controller_sidebar_partial
+        side_bar = render :partial => controller_sidebar_partial
+        options[:inside].blank? ? side_bar : options[:inside].gsub("yield",side_bar)
       else
         content = "" || yield
         File.exists?(global_sidebar_file) ? render(:partial => global_sidebar_partial) : content
