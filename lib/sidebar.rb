@@ -37,7 +37,12 @@ module Innerfusion
         options[:inside].blank? ? side_bar : options[:inside].gsub("yield",side_bar)
       else
         content = "" || yield
-        File.exists?(global_sidebar_file) ? render(:partial => global_sidebar_partial) : content
+        if File.exists?(global_sidebar_file)
+          global_sidebar = render(:partial => global_sidebar_partial)
+          options[:inside].blank? ? global_sidebar : options[:inside].gsub("yield", global_sidebar) 
+        else
+          content
+        end
       end
     end
     
