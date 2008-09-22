@@ -6,10 +6,10 @@ A simple plugin that will provide you with some helpers to use a sidebar in your
 == INSTALLATION
 
 1. run rake sidebar:install
-2. it will generate a views/sidebars directory
-3. make a views/sidebars/_global.rhtml file, this will be the app-wide sidebar
-   file.
-4. anywhere in your layout (where you want to insert your sidebar) or view file   insert the following:
+2. it will generate a views/sidebars directory and a global sidebar file at 
+   views/sidebar/_global.rhtml
+4. anywhere in your layout (where you want to insert your sidebar) or view file insert the 
+   following:
    <%= display_sidebar %>
 
 == USAGE

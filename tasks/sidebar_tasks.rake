@@ -4,8 +4,12 @@ namespace :sidebar do
   desc 'Install the default skeleton sidebar dir structure'
   task :install do
     sidebar_path = File.join(RAILS_ROOT,"app/views/sidebars")
+    global_sidebar = File.join sidebar_path, "_global.rhtml"
     FileUtils.mkdir_p sidebar_path
-    puts "Sidebars Directory has been generated..."
+    File.open(global_sidebar, "w+") do |file|
+      file << "<!-- This is the best sidebar ever! -->"
+    end
+    puts "The Sidebars Directory has been generated..."
   end
   
   desc 'Generate a sidebar skeleton with all the needed files under app/views/sidebar'
