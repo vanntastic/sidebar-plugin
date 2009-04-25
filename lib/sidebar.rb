@@ -52,10 +52,15 @@ module Innerfusion
     #   # => render :partial => 'sidebars/#{params[:controller]}/#{sidebar}'
     # you can also copy a sidebar from another controller by passing the controller hash
     # copy_from :index, :controller => "home"
-    #   # => render :partial => 'sidebars/home/index.rhtml'
+    #   # => render :partial => 'sidebars/home/index'
+    # you can also use a string if you want to as well...
+    # copy_from "home/index"
+    #   # => render :partial => "sidebars/home/index"
     def copy_from(sidebar, options={})
       options[:controller] ||= params[:controller] 
-      render :partial => "sidebars/#{options[:controller]}/#{sidebar.to_s}" 
+      partial = "sidebars/#{options[:controller]}/#{sidebar.to_s}" if sidebar.is_a?(Symbol)
+      partial = File.join "sidebars", sidebar if sidebar.is_a?(String)
+      render :partial => partial
     end
     
   end
