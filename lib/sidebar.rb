@@ -21,16 +21,16 @@ module Innerfusion
       options[:inside] ||= ""
       sidebar_partial = "sidebars/#{params[:controller]}/#{params[:action]}"
       sidebar_file = File.join(RAILS_ROOT, "app/views/sidebars", params[:controller], 
-                              "_#{params[:action]}.rhtml")
+                              "_#{params[:action]}.html.erb")
 
       controller_sidebar_partial = "sidebars/#{params[:controller]}/global"                        
-      controller_sidebar_file = File.join(RAILS_ROOT, "app/views/sidebars/#{params[:controller]}/_global.rhtml")
+      controller_sidebar_file = File.join(RAILS_ROOT, "app/views/sidebars/#{params[:controller]}/_global.html.erb")
 
-      global_sidebar_file = "#{RAILS_ROOT}/app/views/sidebars/_global.rhtml"
+      global_sidebar_file = "#{RAILS_ROOT}/app/views/sidebars/_global.html.erb"
       global_sidebar_partial = "sidebars/global"
 
       if File.exists?(sidebar_file)
-        side_bar = render(:partial => sidebar_partial) 
+        side_bar = render(:partial => sidebar_partial)
         options[:inside].blank? ? side_bar : options[:inside].gsub("yield",side_bar)
       elsif File.exists?(controller_sidebar_file)
         side_bar = render :partial => controller_sidebar_partial
