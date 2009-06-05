@@ -25,7 +25,7 @@ namespace :sidebar do
       end
       sidebar_dir_path = "#{RAILS_ROOT}/app/views/sidebars/#{controller}/"
       FileUtils.mkdir_p sidebar_dir_path
-      sidebar_partial_file = "#{sidebar_dir_path}/_#{action}.rhtml"
+      sidebar_partial_file = "#{sidebar_dir_path}/_#{action}.html.erb"
       File.open(sidebar_partial_file,"w+") do |file|
         file << "<!-- Add in content for your sidebar below -->"
       end
