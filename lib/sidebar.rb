@@ -23,7 +23,7 @@ module Innerfusion
       sidebar_file = File.join(RAILS_ROOT, "app/views/sidebars", params[:controller], 
                               "_#{params[:action]}.html.erb")
       old_sidebar_file = File.join(RAILS_ROOT, "app/views/sidebars", params[:controller],
-                              "_#{params[:action]}.rhml")                        
+                              "_#{params[:action]}.rhtml")                        
 
       controller_sidebar_partial = "sidebars/#{params[:controller]}/global"                        
       controller_sidebar_file = File.join(RAILS_ROOT, 
