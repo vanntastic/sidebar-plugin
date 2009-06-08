@@ -22,22 +22,29 @@ module Innerfusion
       sidebar_partial = "sidebars/#{params[:controller]}/#{params[:action]}"
       sidebar_file = File.join(RAILS_ROOT, "app/views/sidebars", params[:controller], 
                               "_#{params[:action]}.html.erb")
+      old_sidebar_file = File.join(RAILS_ROOT, "app/views/sidebars", params[:controller],
+                              "_#{params[:action]}.rhml")                        
 
       controller_sidebar_partial = "sidebars/#{params[:controller]}/global"                        
-      controller_sidebar_file = File.join(RAILS_ROOT, "app/views/sidebars/#{params[:controller]}/_global.html.erb")
+      controller_sidebar_file = File.join(RAILS_ROOT, 
+                                "app/views/sidebars/#{params[:controller]}/_global.html.erb")
+      old_controller_sidebar_file = File.join(RAILS_ROOT, 
+                                "app/views/sidebars/#{params[:controller]}/_global.rhtml")
 
       global_sidebar_file = "#{RAILS_ROOT}/app/views/sidebars/_global.html.erb"
+      old_global_sidebar_file = "#{RAILS_ROOT}/app/views/sidebars/_global.rhtml"
       global_sidebar_partial = "sidebars/global"
-
-      if File.exists?(sidebar_file)
+      
+      
+      if File.exists?(sidebar_file) || File.exists?(old_sidebar_file)
         side_bar = render(:partial => sidebar_partial)
         options[:inside].blank? ? side_bar : options[:inside].gsub("yield",side_bar)
-      elsif File.exists?(controller_sidebar_file)
+      elsif File.exists?(controller_sidebar_file) || File.exists?(old_controller_sidebar_file)
         side_bar = render :partial => controller_sidebar_partial
         options[:inside].blank? ? side_bar : options[:inside].gsub("yield",side_bar)
       else
         content = "" || yield
-        if File.exists?(global_sidebar_file)
+        if File.exists?(global_sidebar_file) || File.exists?(old_global_sidebar_file)
           global_sidebar = render(:partial => global_sidebar_partial)
           options[:inside].blank? ? global_sidebar : options[:inside].gsub("yield", global_sidebar) 
         else
